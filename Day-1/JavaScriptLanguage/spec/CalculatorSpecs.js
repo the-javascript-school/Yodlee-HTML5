@@ -74,5 +74,58 @@ describe("Calculator",function(){
 			//Assert
 			expect(result).toBe(expectedResult);
 		});
+		it("Should be able to add a list of numbers passed as an array",function(){
+			var numbers = [10,20,30]
+				expectedResult = 60;
+
+			//Act
+			var result = add(numbers);
+
+			//Assert
+			expect(result).toBe(expectedResult);
+		});
+		it("Should be able to add a list of numbers passed as a nested array",function(){
+			var numbers = [10,[20,[30]]]
+				expectedResult = 60;
+
+			//Act
+			var result = add(numbers);
+
+			//Assert
+			expect(result).toBe(expectedResult);
+		});
+		it("Should be able to add a list of functions returning numbers passed as a nested array",function(){
+			var fns = [
+				function() {return 10;},
+				function() {return 20;},
+				function() {return 30;},
+			]
+				expectedResult = 60;
+
+			//Act
+			var result = add(fns);
+
+			//Assert
+			expect(result).toBe(expectedResult);
+		});
+		it("Trying to do everything",function(){
+			var args = [
+				10,
+				[20,30],
+				[40,[50,[60]]],
+				function() {return 70;},
+				[
+					function() {return 80;},
+					function() {return [90,[100]];}
+				],
+			],
+				expectedResult = 550;
+
+			//Act
+			var result = add(args);
+
+			//Assert
+			expect(result).toBe(expectedResult);
+		});
 	});
 });

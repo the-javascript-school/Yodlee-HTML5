@@ -1,8 +1,9 @@
-function add(number1,number2){
+function add(){
 	function parseArg(n){
 		if (typeof n === "number") return n;
 		if (typeof n === "string" && !isNaN(n)) return +(n);
 		if (typeof n === "function") return parseArg(n());
+		if (!!n.length) return add.apply(this,n);
 		return 0;
 	}
 	var result = 0;
