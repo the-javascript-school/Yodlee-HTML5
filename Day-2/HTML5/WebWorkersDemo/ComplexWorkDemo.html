@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Multithreading demo</title>
+	<script>
+	(function(){
+		window.addEventListener("DOMContentLoaded",initialize);
+		function initialize(){
+			document.getElementById("btnDoWork").addEventListener("click",onBtnDoWorkClick);
+		}
+		function onBtnDoWorkClick(){
+			displayMessage("Work Started...");
+			doWork(function(){
+				displayMessage("Work Completed");
+			},function(percentCompleted){
+				document.getElementById("progress").value = percentCompleted;
+			});
+			
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessage").innerHTML += msg + "<br/>";
+		}
+		function doWork(onCompletionCallback,onProgressCallback){
+			var maxIteration = 1000;
+			var currentIteration = 0;
+			(function(){
+				for(var i=0;i<100000/maxIteration;i++)
+					for(var j=0;j<1000;j++)
+						for(var k=0;k<100;k++)
+						{}	
+				if (++currentIteration > maxIteration) {
+					if (!!onCompletionCallback) onCompletionCallback();
+					return;
+				};
+				if (!!onProgressCallback) onProgressCallback((currentIteration/maxIteration) * 100)
+				setTimeout(arguments.callee);
+			}());
+		}
+	}());
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div>
+		<progress id="progress" min="0" max="100" value="0"></progress>
+	</div>
+	<div id="divMessage"></div>
+</body>
+</html>
