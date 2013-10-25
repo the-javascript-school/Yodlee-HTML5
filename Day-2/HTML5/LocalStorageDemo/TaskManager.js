@@ -3,8 +3,20 @@
 	var taskStorage = new TaskStorage(window.localStorage);
 	function initialize(){
 		document.getElementById("btnSave").addEventListener("click",onBtnSaveClick);
+		document.getElementById("btnRemoveCompleted").addEventListener("click",onBtnRemoveCompletedClick)
 		loadTasksFromStorage();
 
+	}
+	function onBtnRemoveCompletedClick(){
+		var ulTaskList = document.getElementById("ulTaskList");
+		for(var i=ulTaskList.children.length-1;i>=0;i--){
+			var item = ulTaskList.children[i];
+			if (item.classList.contains("completed")){
+				taskStorage.removeTask(item.getAttribute("task-id"));
+				item.remove();
+			}
+
+		}
 	}
 	function loadTasksFromStorage(){
 		var tasks = taskStorage.getAllTasks();

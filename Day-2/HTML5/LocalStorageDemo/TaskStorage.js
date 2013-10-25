@@ -19,3 +19,7 @@ TaskStorage.prototype.getAllTasks = function(){
 	}
 	return tasks;
 }
+
+TaskStorage.prototype.removeTask = function(id){
+	this.storage.removeItem(id);
+}
