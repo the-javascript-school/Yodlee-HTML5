@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<style>
+		.completed{
+			color : red;
+			text-decoration:  line-through;
+			font-style: italic;
+		}
+	</style>
+	<script src="TaskStorage.js"></script>
+	<script src="TaskManager.js"></script>
+</head>
+<body>
+	<h1>Task Manager</h1>
+	<span>Task :</span>
+	<input type="text" name="" id="txtTask">
+	<input type="button" value="Save" id="btnSave">
+	<input type="button" value="Remove Completed" id="btnRemoveCompleted">
+	<ul id="ulTaskList"></ul>
+</body>
+</html>
